@@ -1,13 +1,13 @@
 variable "organization" {
     description = "Organization name for tests"
     type        = string
-    default     = "b59"
+    default     = ""
 }
 
 variable "environment" {
     description = "Environment name for tests"
     type        = string
-    default     = "dev"
+    default     = ""
 }
 
 variable "location" {

@@ -12,11 +12,13 @@
 variable "organization" {
   description = "The name part of Azure resource names representing the Organization"
   type        = string
+  default     = ""
 }
 
 variable "environment" {
   description = "The environment name part of Azure resource names representing the Environment"
   type        = string
+  default     = ""
 }
 
 variable "location" {
