@@ -6,7 +6,9 @@ env:
   ACTIONS_RUNNER_DEBUG: 'true'
   ACTIONS_STEP_DEBUG: 'true'
   TF_LOG: 'DEBUG'
-  TF_LOG_PATH: '${{ runner.temp }}/terraform-debug.log'
+  # TF_LOG_PATH cannot use the runner context at workflow top-level (runner.temp is not
+  # available there). Individual steps set TF_LOG_PATH using the runner-provided
+  # $RUNNER_TEMP environment variable instead.
 
 jobs:
   build:
@@ -53,6 +55,8 @@ jobs:
 
       - name: Run unit tests
         working-directory: ./tests
+        env:
+          TF_LOG_PATH: "$RUNNER_TEMP/terraform-debug.log"
         run: ./run-tests.sh
 
       - name: Print Terraform debug log (on failure)
