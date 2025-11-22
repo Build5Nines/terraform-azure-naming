@@ -1,6 +1,6 @@
-# tf-azure-region-naming
+# Azure Region Naming Terraform Module from Build5Nines
 
-Azure Resource Naming is easier and more consistent with this Terraform module. It helps you:
+Naming Microsoft Azure resources provisioned across multiple Azure Regions and Environment deployments is easier and more consistent with this Terraform module. It helps you:
 
 - Normalize Azure region inputs (both display names like "East US" and programmatic names like "eastus").
 - Generate a consistent location-aware name suffix (e.g., `{org}-{loc}-{env}` -> `contoso-eus-prod`).
