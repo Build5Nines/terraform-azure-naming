@@ -112,4 +112,19 @@
   "southafricanorth": "southafricanorth",
   "South Africa West": "southafricawest",
   "southafricawest": "southafricawest"
+  ,
+  "Sweden South": "swedensouth",
+  "swedensouth": "swedensouth",
+  "East US 2 EUAP": "eastus2euap",
+  "eastus2euap": "eastus2euap",
+  "Central US EUAP": "centraluseuap",
+  "centraluseuap": "centraluseuap",
+  "East US STG": "eastusstg",
+  "eastusstg": "eastusstg",
+  "South Central US STG": "southcentralusstg",
+  "southcentralusstg": "southcentralusstg",
+  "Jio India West": "jioindiawest",
+  "jioindiawest": "jioindiawest",
+  "Jio India Central": "jioindiacentral",
+  "jioindiacentral": "jioindiacentral"
 }
