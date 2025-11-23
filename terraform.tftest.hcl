@@ -44,7 +44,7 @@ run "basic-eastus" {
   }
 
   assert {
-    condition = output.organization == "acme"
+    condition     = output.organization == "acme"
     error_message = "organization did not match expected"
   }
 }
