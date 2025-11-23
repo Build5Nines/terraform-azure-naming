@@ -204,7 +204,7 @@ By default, the module will lookup the Microsoft Region Pair to return for the `
 | Name | Description |
 |------|-------------|
 | `base_suffix` | Final joined suffix string (e.g. `b59-eus-prod`). |
-| `resoruces` | The full upstream Azure naming module instance (access resource names via `resources.<resource>.name`). |
+| `resources` | The full upstream Azure naming module instance (access resource names via `resources.<resource>.name`). |
 | `organization` | Echo of `var.organization`. |
 | `environment` | Echo of `var.environment`. |
 | `location` | Original provided location input. |
