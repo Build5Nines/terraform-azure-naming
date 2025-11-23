@@ -29,6 +29,16 @@ run "basic-eastus" {
   }
 
   assert {
+    condition     = output.prefix.storage_account.name == "stacmeeusprd"
+    error_message = "prefix.storage_account.name did not match expected"
+  }
+
+  assert {
+    condition     = output.prefix.sql_server.name == "sql-acme-eus-prd"
+    error_message = "prefix.sql_server.name did not match expected"
+  }
+
+  assert {
     condition     = output.location_secondary == "westus"
     error_message = "location_secondary did not match expected"
   }

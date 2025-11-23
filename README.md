@@ -44,6 +44,34 @@ rg-b59-eus-prod
 ```
 (`rg` is applied internally by the upstream module as the slug for a resource group.)
 
+This naming pattern enables the use of this module to more easily adhere to a defined Azure resource naming convention for multiple Azure resources. Here's an example of using this to set the _prefix_ of the Azure resource names, while naming them according to the specific workload:
+
+```hcl
+
+resource "azurerm_storage_account" "files" {
+  name                     = "${module.naming_primary.prefix.storage_account.name}files"
+  resource_group_name      = azurerm_resource_group.main.name
+  location                 = azurerm_resource_group.main.location
+  account_tier             = "Standard"
+  account_replication_type = "GRS"
+}
+
+resource "azurerm_sql_server" "sql_data" {
+  name                         = "${module.naming_primary.prefix.sql_server.name}-data"
+  resource_group_name          = azurerm_resource_group.main.name
+  location                     = azurerm_resource_group.main.location
+  version                      = "12.0"
+  administrator_login          = "dataadministrator"
+  administrator_login_password = "b59isawesome"
+}
+```
+
+Resulting resources will be named (example):
+```
+Storage Account = stb59eusprodfiles
+SQL Server      = sql-b59-eus-prod-data
+```
+
 ---
 ## Accessing Resource Names
 
