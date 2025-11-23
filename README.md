@@ -26,7 +26,7 @@ It then passes that suffix to the upstream Azure naming module so you can access
 
 ```hcl
 module "naming_primary" {
-    source        = "github.com/Build5Nines/terraform-azure-naming"
+    source        = "Build5Nines/naming/azurerm"
     organization  = "b59"
     environment   = "prod"
     location      = "East US"   # or "eastus"
@@ -89,7 +89,7 @@ resource "azurerm_key_vault" "kv" {
 
 ```hcl
 module "naming_secondary" {
-    source       = "github.com/Build5Nines/terraform-azure-naming"
+    source       = "Build5Nines/naming/azurerm"
     organization = module.naming_primary.organization
     environment  = module.naming_primary.environment
     location     = module.naming_primary.location_secondary
@@ -102,11 +102,12 @@ The default suffix is equivalent to the pattern array:
 ```hcl
 name_suffix = ["{org}", "{loc}", "{env}"]
 ```
+
 You can rearrange or add static parts:
 
 ```hcl
 module "naming_primary" {
-    source        = "github.com/Build5Nines/terraform-azure-naming"
+    source        = "Build5Nines/naming/azurerm"
     organization  = "b59"
     environment   = "dev"
     location      = "westeurope"
@@ -117,9 +118,10 @@ module "naming_primary" {
 ## Customizing the Azure Region / Location Abbreviations
 
 Override region abbreviations:
+
 ```hcl
 module "naming_primary" {
-    source        = "github.com/Build5Nines/terraform-azure-naming"
+    source        = "Build5Nines/naming/azurerm"
     organization  = "b59"
     environment   = "prod"
     location      = "East US"
@@ -136,7 +138,7 @@ Override the secondary location by setting a custom secondary region on the prim
 
 ```hcl
 module "naming_primary" {
-    source              = "github.com/Build5Nines/terraform-azure-naming"
+    source              = "Build5Nines/naming/azurerm"
     organization        = "b59"
     environment         = "prod"
     location            = "East US"
@@ -238,14 +240,14 @@ This module wraps and extends the Microsoft `Azure/naming/azurerm` module, addin
 ## Example: Multi‑Region Deployment
 ```hcl
 module "naming_primary" {
-    source       = "github.com/Build5Nines/terraform-azure-naming"
+    source       = "Build5Nines/naming/azurerm"
     organization = "b59"
     environment  = "prod"
     location     = "East US"
 }
 
 module "naming_secondary" {
-    source       = "github.com/Build5Nines/terraform-azure-naming"
+    source       = "Build5Nines/naming/azurerm"
     organization = module.naming_primary.organization
     environment  = module.naming_primary.environment
     location     = module.naming_primary.location_secondary
