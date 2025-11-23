@@ -26,7 +26,7 @@ It then passes that suffix to the upstream Azure naming module so you can access
 
 ```hcl
 module "azure_primary" {
-    source        = "Build5Nines/naming/azurerm"
+    source        = "Build5Nines/naming/azure"
     organization  = "b59"
     environment   = "prod"
     location      = "East US"   # or "eastus"
@@ -117,7 +117,7 @@ resource "azurerm_key_vault" "kv" {
 
 ```hcl
 module "azure_secondary" {
-    source       = "Build5Nines/naming/azurerm"
+    source       = "Build5Nines/naming/azure"
     organization = module.azure_primary.organization
     environment  = module.azure_primary.environment
     location     = module.azure_primary.location_secondary
@@ -137,7 +137,7 @@ You can rearrange or add static parts:
 
 ```hcl
 module "azure_primary" {
-    source        = "Build5Nines/naming/azurerm"
+    source        = "Build5Nines/naming/azure"
     organization  = "b59"
     environment   = "dev"
     location      = "westeurope"
@@ -151,7 +151,7 @@ Override region abbreviations:
 
 ```hcl
 module "azure_primary" {
-    source        = "Build5Nines/naming/azurerm"
+    source        = "Build5Nines/naming/azure"
     organization  = "b59"
     environment   = "prod"
     location      = "East US"
@@ -168,7 +168,7 @@ Override the secondary location by setting a custom secondary region on the prim
 
 ```hcl
 module "azure_primary" {
-    source              = "Build5Nines/naming/azurerm"
+    source              = "Build5Nines/naming/azure"
     organization        = "b59"
     environment         = "prod"
     location            = "East US"
@@ -270,14 +270,14 @@ This module wraps and extends the Microsoft `Azure/naming/azurerm` module, addin
 ## Example: Multi‑Region Deployment
 ```hcl
 module "azure_primary" {
-    source       = "Build5Nines/naming/azurerm"
+    source       = "Build5Nines/naming/azure"
     organization = "b59"
     environment  = "prod"
     location     = "East US"
 }
 
 module "azure_secondary" {
-    source       = "Build5Nines/naming/azurerm"
+    source       = "Build5Nines/naming/azure"
     organization = module.azure_primary.organization
     environment  = module.azure_primary.environment
     location     = module.azure_primary.location_secondary
