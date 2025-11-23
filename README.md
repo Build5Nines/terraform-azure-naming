@@ -47,6 +47,8 @@ resource "azurerm_resource_group" "rg" {
 }
 ```
 
+> This module uses the official [Azure naming module from Microsoft](https://github.com/Azure/terraform-azurerm-naming) (`source = "Azure/naming/azurerm"`) internally to compose the Azure resource names. The `prefix` output of this module (such as `module.azure_promary_region.prefix`) is an instance of the `Azure/naming/azurerm` module, so use that to get the Azure resource names prefixed with the Azure service abbreviations.
+
 Override the suffix pattern:
 
 ```hcl
@@ -103,6 +105,12 @@ module "azure_secondary_region" {
 - `location_abbreviation` (string): Abbreviated region code resolved from JSON (falls back to canonical short name when missing).
 - `location_secondary` (string): Canonical programmatic region name (e.g., `eastus`).
 
+## How abbreviations are chosen
+
+Abbreviations aim to be short and readable (e.g., `eastus` -> `eus`, `westeurope` -> `weu`). If a region is missing from `region_abbr.json`, the module falls back to the canonical short name (lowercased, spaces removed), so your pipeline won’t break if a new region appears before the data file is updated.
+
+Note: the module normalizes lookups for overrides and region inputs. You can provide override keys as either display names (e.g. `"East US"`) or programmatic short names (e.g. `"eastus"`) — the module will canonicalize keys (lowercase, no spaces) and prefer the canonical form when resolving abbreviations, so an override like `eastus = "east"` will apply even if you pass `var.location = "East US"`.
+
 ## Data-driven region lookups
 
 Two JSON files back the region logic:
@@ -116,24 +124,6 @@ Two JSON files back the region logic:
     - `"eastus": "eastus"`
 
 These are loaded in `main.tf` using `jsondecode(file(...))`. Because the data files live in the repo, updates are simple PRs with clear diffs.
-
-## How abbreviations are chosen
-
-Abbreviations aim to be short and readable (e.g., `eastus` -> `eus`, `westeurope` -> `weu`). If a region is missing from `region_abbr.json`, the module falls back to the canonical short name (lowercased, spaces removed), so your pipeline won’t break if a new region appears before the data file is updated.
-
-Note: the module normalizes lookups for overrides and region inputs. You can provide override keys as either display names (e.g. `"East US"`) or programmatic short names (e.g. `"eastus"`) — the module will canonicalize keys (lowercase, no spaces) and prefer the canonical form when resolving abbreviations, so an override like `eastus = "east"` will apply even if you pass `var.location = "East US"`.
-
-## Keeping regions up to date
-
-- The validation list in `variables.tf` and the JSON files track the public Azure regions. When Microsoft adds new regions, submit a PR to:
-    - Add entries to `data/region_abbr.json` and `data/region_pair.json`.
-    - Optionally extend the validation list in `variables.tf` (display and programmatic names).
-
-Tip: You can confirm the latest region list using the Azure CLI:
-
-```bash
-az account list-locations -o table
-```
 
 ## How the pattern enforces convention
 
