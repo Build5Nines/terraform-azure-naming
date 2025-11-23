@@ -1,4 +1,4 @@
-# Azure Region Naming (Build5Nines)
+# Azure Naming
 
 > Consistent, location‑aware, environment‑aware Azure resource naming built on top of the official Microsoft [Azure/naming/azurerm](https://github.com/Azure/terraform-azurerm-naming) module.
 
