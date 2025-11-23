@@ -96,9 +96,11 @@ module "naming_secondary" {
 }
 
 ---
+
 ## Customizing the Suffix Pattern
 
 The default suffix is equivalent to the pattern array:
+
 ```hcl
 name_suffix = ["{org}", "{loc}", "{env}"]
 ```
