@@ -8,6 +8,20 @@ test {
   parallel = true
 }
 
+run "basic-westus" {
+  command = plan
+
+  variables {
+    location     = "West US"
+    name_suffix  = ["{loc}"]
+  }
+
+  assert {
+    condition     = output.resources.resource_group.name == "rg-wus"
+    error_message = "prefix_resource_group_name did not match expected"
+  }
+}
+
 // Basic East US test
 run "basic-eastus" {
   command = plan
