@@ -68,6 +68,7 @@ module "azure_naming" {
   suffix = local.name_suffix
   prefix = local.name_prefix
 
+  unique-seed            = var.unique_seed
   unique-length          = var.unique_length
   unique-include-numbers = var.unique_include_numbers
 }

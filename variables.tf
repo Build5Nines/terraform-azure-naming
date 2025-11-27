@@ -193,3 +193,9 @@ variable "unique_length" {
   type        = number
   default     = 4
 }
+
+variable "unique_seed" {
+  description = "Custom value for the random characters to be used"
+  type        = string
+  default     = ""
+}
