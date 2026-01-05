@@ -63,7 +63,8 @@ locals {
 # Azure Naming Module
 # https://github.com/Azure/terraform-azurerm-naming
 module "azure_naming" {
-  source = "Azure/naming/azurerm"
+  source  = "Azure/naming/azurerm"
+  version = "0.4.3"
 
   suffix = local.name_suffix
   prefix = local.name_prefix
